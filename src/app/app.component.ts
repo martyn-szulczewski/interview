@@ -1,12 +1,18 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
+import {AppLayout} from './layout/app-layout/app-layout.component';
+import {JournalList} from './ui/journal-list/journal-list.component';
+import {JournalsService} from './core/journals.service';
+import {AsyncPipe} from '@angular/common';
 
 @Component({
   selector: 'iw-root',
-  imports: [RouterOutlet],
+  imports: [AppLayout, JournalList, AsyncPipe],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class App {
-  protected readonly title = signal('interview');
+
+  private readonly journalService = inject(JournalsService);
+
+  protected readonly journals = this.journalService.getJournals();
 }

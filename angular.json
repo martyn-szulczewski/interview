@@ -11,7 +11,8 @@
       "schematics": {
         "@schematics/angular:component": {
           "type": "component",
-          "addTypeToClassName": false
+          "addTypeToClassName": false,
+          "changeDetection": "OnPush"
         },
         "@schematics/angular:directive": {
           "type": "directive",
